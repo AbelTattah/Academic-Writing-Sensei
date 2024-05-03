@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Academic Writing Sensei</title>
+  </head>
+  <body>
+  <div id = "navbar">
+      <a href="/" class="navItem">Aca Sensei</a>
+      <a href="/about" class="navItem">About</a>
+    </div>
+    <div class = "mainContent">    
+      <h1>Hi there, I am Kofi.<br>
+      I am your AI Academic writing instructor</h1>
+    </div>
+    <div class = "start">    
+      <a href="/chat">
+        <button id="startLearning">
+          Start Learning
+        </button>
+        </a>
+    </div>
+      <div id = "desc">
+        <p>Made by Tattah Abel Mawunyo</p>
+        <p>Note: This is experimental</p>
+      </div>
+    <style>
+        body {
+          display:flex;
+          justify:center;
+          align-items:center;
+          flex-direction:column;
+          font-family:system-ui;
+        }
+
+        a {
+          text-decoration:none;
+          color:black;
+        }
+
+        #navbar {
+          margin-top:2%;
+          display:flex;
+          flex-direction:row;
+          justify-content:space-between;
+          padding-bottom:1%;
+          border-bottom-width:1px;
+          border-bottom-style:groove;
+          width:90%
+        }
+
+        .navItem {
+          font-weight:bold;
+          font-size:1.5rem;
+        }
+
+        .navItem:hover {
+          font-weight:300;
+        }
+
+        #desc {
+          margin-top:11%;
+          display:flex;
+          flex-direction:row;
+          width:90%;
+          border-top-width:1px;
+          border-top-style:groove;
+          justify-content:space-between;
+        }
+
+        .mainContent {
+          margin-top:8%;
+          display:flex;
+          height:8rem;
+          padding:20px;
+          flex-direction:column;
+          color:white;
+          border-radius:20px;
+          background-color:#1C3449;
+          justify-content:flex-start;
+          padding-bottom:7%;
+          width:86%
+        }
+
+        .start {
+          color:black;
+          background-color:white;
+          width:90%;
+          justify-content:flex-start;
+          display:flex;
+          flex-direction:column;
+        }
+
+
+
+        #startLearning {
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background-color:white;
+          border-radius:0.7rem;
+          margin-top:6%;
+          margin-left:1%;
+          padding:2%
+        }
+        
+        #startLearning:hover {
+          background-color:black;
+          color:white;
+        }
+
+        @media (max-width:499px) {
+          .mainContent {
+            margin-top:28%;
+            padding-bottom:20%;
+          }
+          #startLearning {
+            margin-bottom:39%;
+            padding:4%;
+          }
+          #desc {
+            flex-direction:column;
+            justify-content:flex-start;
+          }
+        } 
+        @media (500px<width<900px) {
+          .mainContent {
+            margin-top:18%;
+            padding-bottom:10%;
+          }
+          #startLearning {
+            margin-bottom:19%;
+            margin-left:1%;
+          }
+
+        } 
+
+    </style>
+  </body>

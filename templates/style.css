@@ -1,0 +1,12 @@
+#send_button {
+    height: 50px;
+    width: 70px;
+  }
+
+#chat_view {
+    height: 200px;
+    width: 300px;
+    border-width:2px;
+    border-color: black;
+    background-color:"#00f9";
+  }

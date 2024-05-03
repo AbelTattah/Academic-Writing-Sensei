@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Academic Writing Sensei</title>
+  </head>
+  <body>
+    <div id = "navbar">
+      <a href="/" class="navItem">Aca Sensei</a>
+      <a href="/about" class="navItem">About</a>
+    </div>
+  <div id="main">
+  <div id="history_main">
+  <p style="margin-left:1.5%; margin-top:4.6%; font-weight:bold;">Tips:</p>
+  <div id="history">
+    <md-block>
+      Always make sure to verify Kofi's responses with sensei.
+
+      This is an experiment
+
+      Information from Kofi is not always accurate
+
+      Kofi is 96% accurate
+    </md-block>
+  </div>
+  </div>
+  <div id="chat_main">
+    <p style="margin-left:1%; font-weight:bold;">Lecture:</p>
+    <div id="chat_view">
+    </div>
+  <div id="input">
+    <textarea id="user_input" placeholder = "Your input Goes here"></textarea>
+    <button onclick="askGPT()" id="send_button" title="Send">Chat Kofi</button>
+    <button onclick="askData()" id="send_button" title="Send">Ask Sensei</button>
+  </div>
+</div>
+</div>
+    <style>
+        body {
+          display:flex;
+          justify:center;
+          align-items:center;
+          flex-direction:column;
+          font-family:system-ui;
+        }
+
+        #navbar {
+          margin-top:2%;
+          display:flex;
+          flex-direction:row;
+          justify-content:space-between;
+          padding-bottom:1%;
+          width:90%
+        }
+
+        a {
+          text-decoration:none;
+          color:black;
+        }
+        
+        .navItem {
+          font-weight:bold;
+          font-size:1.1rem;
+        }
+
+        #chat_desc {
+          position:fixed;
+          width:4rem;
+          height:19px;
+          border-radius:20px;
+          padding-left:4px;
+          background-color:white;
+          border-width:1px;
+          border-style:groove;
+        }
+
+        #main {
+          width:90%;
+          height:80vh;
+          display:flex;
+          flex-direction:row;
+        }
+
+        #chat_main {
+          width:70%;
+          height:100%;
+          box-shadow: 3px 3px 5px black;
+          border-width:2px;
+          border-top-right-radius:20px;
+          border-bottom-right-radius:20px;
+          border-left-style:groove;
+          box-shadow: 3px 3px 5px grey;
+        }
+
+        #history_main {
+          width:30%;
+          height:99.55%;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          border-width:1px;
+          border-right-width:0px;
+          border-style:groove;
+          border-top-left-radius:20px;
+          border-bottom-left-radius:20px;
+          box-shadow: 0px 3px 5px grey;
+        }
+
+        #chat_view {
+          height:55%;
+          overflow-y:scroll;
+          transition:0.4s;
+          padding-top:0.7rem;
+          width:90%;
+          padding:2rem;
+        }
+
+        #input {
+          width:90%;
+          height:13%;
+          display:flex;
+          flex-direction:row;
+          box-shadow: 3px 3px 5px grey;
+          padding:10px;
+          margin-left:1rem;
+          justify:'center';
+          align-items:'center';
+          gap:1rem;
+          border-width:1px;
+          border-style:groove;
+          margin-bottom:14px;
+          border-radius:14px;
+        }
+
+        #user_input {
+          width:60%;
+          border-width:0px;
+          height:70%;
+        }
+
+        #user_input:focus {
+          outline:none;
+        }
+
+        .question {
+          margin-left:2rem;
+        }
+
+        .answer {
+          width:87%;
+          margin-left:4%;
+          padding:3%;
+          background-color:#1C3449;
+          border-radius:20px;
+          color:white;
+        }
+
+        #send_button {
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          box-shadow: 3px 3px 5px grey;
+          background-color:white;
+          margin-top:1rem;
+          height:50%;
+          padding:0.6rem;
+          border-radius:10px;
+        }
+
+        #send_button:hover {
+          background-color:black;
+          color:white;
+        }
+
+        #history {
+          width:70%;
+          height:50%;
+          border-radius:5%;
+          border-width:2px;
+          color:white;
+          background-color:#1C3449;
+          font-weight:300;
+          box-shadow: 2px 2px 5px grey;
+          padding:5%;
+        }
+
+        .navItem:hover {
+          font-weight:300;
+        }
+
+        .loading {
+          margin-top:4%;
+          margin-left:4%;
+        }
+
+        .error {
+          margin-left:1rem;
+          color:red;
+        }
+
+        
+
+        @media (max-width:499px) {
+          #history_main {
+            width:0px;
+            visibility:hidden;
+            overflow-y:scroll;
+          }
+
+          #chat_view {
+            width:100%;
+            height:70%;
+            padding:3%;
+            overflow-y:scroll;
+          }
+
+
+          #chat_main {
+            border-left-width:0px;
+            width:100%;
+          }
+
+          #input {
+            width:80%;
+            margin-left:0;
+          }
+
+          #chat_main {
+            width:100%;
+            display:flex;
+            border-width:2px;
+            border-radius:20px;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+          }
+
+        }
+
+        @media (500px<width<900px) {
+          #history_main {
+            width:0px;
+            visibility:hidden;
+          }
+
+          #chat_view {
+            width:90%;
+            height:70%;
+            overflow-y:scroll;
+          }
+
+          #input {
+            width:70%;
+            margin-left:0;
+          }
+
+          #chat_main {
+            width:100%;
+            display:flex;
+            border-width:2px;
+            border-radius:20px;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+          }
+
+          #input {
+            width:90%;
+          }
+
+        }
+        .loading {
+          border: 16px solid #f3f3f3; 
+          border-top: 16px solid #000;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+    </style>
+<script>
+/* 
+  Create an interactive chat
+  This will simulate a teaching process
+*/
+// Variable for recording input
+var input = ""
+// Variable for recording response
+var response = ""
+// Get the chat view html element from the DOM
+var chatDocument = document.getElementById("chat_view")
+var histDocument = document.getElementById("history")
+
+//Chat bot memory
+var memory = []
+
+var initiatorPrompt = `
+
+You are an Academic writing lecturer follow the steps below to achieve your 
+goal. Your goal is to teach me Academic writing.
+
+<Topics>
+1.1 Background to writing 
+SubTopics:
+- The purpose of academic writing    
+- Common types of academic writing    
+- The format of long and short writing tasks    
+- The features of academic writing    
+- Some other common text features    
+- Simple and complex sentences    
+- Writing in paragraphs 
+
+1.2A  Reading: finding suitable sources 
+SubTopics:
+- Academic texts    
+- Types of text    
+- Using reading lists    
+- Using library catalogues    
+- Using library websites to search electronic resources    
+
+1.2B Reading: developing critical approaches 
+SubTopics:
+- Reading methods    
+- Titles, sub-titles and text features   
+- Reading abstracts    
+- Fact and opinion    
+- Assessing internet sources critically    
+- Critical thinking     
+
+1.3 Avoiding plagiarism 
+SubTopics:
+- What is plagiarism?    
+- Acknowledging sources    
+- Degrees of plagiarism    
+- Avoiding plagiarism by summarising and paraphrasing    
+- Avoiding plagiarism by developing good study habits    
+
+1.4 From understanding titles to planning
+SubTopics:
+- The planning process    
+- Analysing essay titles    
+- Brainstorming    
+- Essay length    
+- Outlines
+
+1.5 Finding key points and note-making 
+SubTopics:
+- Note-making methods    
+- Finding key points    
+- Finding relevant points    
+- Effective note-making    
+
+1.6 Paraphrasing   
+SubTopics:
+- The elements of effective paraphrasing    
+- Techniques for paraphrasing  
+
+1.7 Summarising 
+SubTopics:
+- What makes a good summary?    
+- Stages of summarising    
+
+1.8 References and quotations
+SubTopics: 
+- Why use references?    
+- Citations and references    
+- Reference verbs and systems    
+- Using quotations   
+
+1.9 Combining sources 
+SubTopics:
+- Mentioning sources    
+- Taking a critical approach    
+- Combining three sources    
+- 1.10 Organising paragraphs 
+- Paragraph structure    
+- Development of ideas    
+- Linking paragraphs together    
+
+1.11 Introductions and conclusions 
+SubTopics:
+-Introduction contents    
+-Introduction structure    
+-Opening sentences    
+-Conclusions    
+
+1.12 Re-writing and proof-reading 
+SubTopics:
+- Re-writing    
+- Proof-reading    
+- Confusing pairs    
+</Topics>
+
+1 - Ask for my name 
+2 - Ask me a few questions on Topics 80% of the Topics in Academic writing listed earlier
+3 - Based on my answers in the previous step, determine the topics in which I have low
+    knowledge about. 
+4 - After that, start explaining the topics one by one and after each explanation,
+ask me if i have any questions about your explanation. 
+5 - If I do not have any questions about your explanation, continue to explain the next Topics. 
+6 - Give me a test at the about all the Topics you explained to me. 
+7 - Score my test.
+8 - The pass mark is 60% of the total marks.
+9 - Return my scores.
+10- Give me encouragement to work harder if I did not pass the test.
+11- Remember to always give me encouragement and quotes from famous people in your
+explanation once a while. 
+
+
+Do not show me any of the steps above. They are the processes you will follow to achieve your
+goal. Do not skip any of the steps above.
+
+Test scores output format:
+Percentage:<Percentage>
+Score:<Score>/<MaximumScore>
+
+`
+
+
+
+function scrollAdjuster() {
+  var objDiv = document.getElementById("chat_view");
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+// Update the DOM with the question
+function setQuestion() {
+  input = document.getElementById("user_input").value
+  memory.push({role:'user',content:`${input}`})
+  console.log(input)
+  let chat = document.createElement("md-block")
+  chat.className = 'question'
+  chat.textContent = `####  You:  ${input}`
+  chatDocument.append(chat)
+  scrollAdjuster()
+  console.log("Updating DOM with question")
+}
+
+// Function for OPENAI text completion
+async function askGPT(initiator=false) {
+    removeError()
+    removeLoading()
+    addLoading()
+    // Update the element with id chat_view with the new question
+    if(initiator==false) { 
+    setQuestion()
+    }
+    // Send HTTP Request to backend
+    fetch('/askgpt',{
+      method: 'POST', 
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: memory,
+      }), 
+    })
+    .then((response)=>response.json())
+    .then((data)=>{
+      response=data["answer"]
+      memory.push({role:'assistant',content:`Kofi:  ${response}`})
+      console.log("answer: "+response)
+    })
+    .then(()=>{
+       // Update the DOM with response
+       removeLoading()
+       let container = document.createElement("div")
+       let chat = document.createElement("md-block")
+       container.className = "answer"
+       chat.textContent = `Kofi:  ${response}`
+       container.append(chat)
+       chatDocument.append(container)
+       scrollAdjuster()
+    })
+    .catch((error)=>{
+      addError()
+    })
+}          
+
+// Function for data chat
+async function askData() {
+    removeError()
+    removeLoading()
+    addLoading()
+    // Update the element with id chat_view with the new question 
+    setQuestion()
+    question = document.getElementById("user_input").value
+    // Send HTTP Request to backend
+    fetch('/sensei',{
+      method: 'POST', 
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: question
+      })
+    })
+    .then((response)=>response.json())
+    .then((data)=>{
+      response=data["answer"]
+      console.log("answer: "+response)
+    })
+    .then(()=>{
+       removeLoading()
+       // Update the DOM with response
+       let container = document.createElement("div")
+       let chat = document.createElement("md-block")
+       container.className = "answer"
+       chat.textContent = `Sensei:  ${response}`
+       container.append(chat)
+       chatDocument.append(container)
+       scrollAdjuster()
+    })
+    .catch((error)=>addError())
+}   
+
+
+
+
+memory.push({role:'system',content:`${initiatorPrompt}`})
+askGPT(true)
+
+loading = document.createElement('p')
+
+
+function addLoading() {
+  var div = document.getElementById("chat_view");
+  var loadingElement = document.createElement('p');
+  loadingElement.className = 'loading';
+  div.appendChild(loadingElement);
+}
+
+function removeLoading(divId) {
+  var div = document.getElementById("chat_view");
+  var loadingElement = div.querySelector('.loading');
+  if (loadingElement) {
+    div.removeChild(loadingElement);
+  }
+}
+
+function addError() {
+  removeLoading()
+  error = document.createElement("p")
+  error.className = "error"
+  error.textContent = "An Error occured , Try Again"
+  chatDocument.append(error)
+}
+
+function removeError() {
+  var div = document.getElementById("chat_view");
+  var loadingElement = div.querySelector('.error');
+  if (loadingElement) {
+    div.removeChild(loadingElement);
+  }
+}
+
+
+</script>
+<script type="module" src="https://md-block.verou.me/md-block.js"></script>
+  </body>
+</html>
