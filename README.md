@@ -10,8 +10,10 @@ writing in an interactive way.
 This software aims to help in studies
 
 The Langchain python library is used to create a chatbot that is able to answer questions based on 
-data. This chatbot combines the power of the openai GPT-3.5 turbo LLM and some other techniques to create
+data. This chatbot combines the power of the openai GPT-3.5 turbo LLM and some other techniques to
 enable it to give accurate answers.
+
+Click here to try the application [Academic Writing](https://academic-writing-sensei-1.onrender.com/)
 
 The data used in this chatbot is obtained from an Academic writing Textbook.
 
@@ -78,8 +80,7 @@ python3 index.py
 ```
 
 An instance of a flask server will be running on your system.
-In order to actually use the endpoints or routes in this application on your machine,
-contact the owner of this repo.
+
 🎉🎉
 
 6. Create a file with .env extension, copy and past the environment variable below in 
