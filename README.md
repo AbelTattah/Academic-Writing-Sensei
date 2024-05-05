@@ -4,8 +4,8 @@ This is a simple chatbot that teaches you academic writing
 
 ## Introduction
 
-The primary goal of this chatbot is to be able to teach a subject like academic 
-writing in an interactive way.
+The primary goal of this chatbot is to be able to teach Academic 
+Writing in an interactive way.
 
 This software aims to help in studies
 
@@ -36,7 +36,7 @@ Make sure you have git and python 3.1.0 installed on your system.
 git clone -b main https://github.com/AbelTattah/Academic-Writing-Sensei.git
 ```
 
-2. Navigate into the folder containing the cloned repository
+2. Navigate into the folder containing the cloned repository 
 
 ```
 cd Academic writing Sensei
@@ -49,10 +49,10 @@ In the root of the cloned repository's folder run
 ```
 python3 -m venv .venv
 ```
-The command above will create a vitual environment that you can use to manage your projects
+The command above will create a virtual environment that you can use to manage your projects
 dependencies or libraries indepedently from globally installed libraries on your system.
 
-Using the virtual environment :
+#### Using the virtual environment :
 Depending on your system run
 
 Windows
@@ -90,8 +90,7 @@ the application
 OPENAI_API_KEY = "your openai api-key "
 ```
 
-You might need an openai account to create an openai api key and even
-make any meaningful contribution to this project.
+You need an openai account to obtain an API key.
 
 ## Routes
 
@@ -161,24 +160,25 @@ make send a post request to this application url throught the /sensei route
 
 ## Troubleshooting
 
-1. Not getting response from /sensei of /askgpt endpoints
-ask:
-Ask the owner of the repo for an openai api key or create an openai account
+1. Not getting any response from /sensei of /askgpt endpoints
+- Make sure your environment variables are set correctly
+
+
 
 2. Cannot connect to application:
 Check your IP address and the port number of this application.
 
-The current setting is
+The current setting is:
+```
+server = WSGIServer(('',3000), app)
+```
+
+Copy and paste this link in your web browser
 
 ```
-# Running the server
-    server = WSGIServer(('ipaddress',port), app)
+http://localhost:3000
 ```
-Enter your current IP address and preferred port number
 
-or if you are accessing the hosted version of this application
-
-Check whether the url is correct or ask the owner of this repo for the url.
 
 ## Contribution
 
