@@ -83,18 +83,16 @@
 
         #chat_main {
           width:70%;
-          height:100%;
-          box-shadow: 3px 3px 5px black;
-          border-width:2px;
+          height:105%;
+          border-width:1px;
           border-top-right-radius:20px;
           border-bottom-right-radius:20px;
-          border-left-style:groove;
-          box-shadow: 3px 3px 5px grey;
+          border-style:groove;
         }
 
         #history_main {
           width:30%;
-          height:99.55%;
+          height:105.05%;
           display:flex;
           flex-direction:column;
           align-items:center;
@@ -103,13 +101,12 @@
           border-style:groove;
           border-top-left-radius:20px;
           border-bottom-left-radius:20px;
-          box-shadow: 0px 3px 5px grey;
         }
 
         #chat_view {
           height:55%;
           overflow-y:scroll;
-          transition:0.4s;
+          transition:2.4s;
           padding-top:0.7rem;
           width:90%;
           padding:2rem;
@@ -120,7 +117,7 @@
           height:13%;
           display:flex;
           flex-direction:row;
-          box-shadow: 3px 3px 5px grey;
+          box-shadow: 1.5px 1.5px 1.5px grey;
           padding:10px;
           margin-left:1rem;
           justify:'center';
@@ -262,7 +259,6 @@
             border-radius:20px;
             flex-direction:column;
             justify-content:center;
-            box-shadow: 0px 0px 0px white;
             align-items:center;
           }
 
@@ -296,6 +292,7 @@ var input = ""
 var response = ""
 // Get the chat view html element from the DOM
 var chatDocument = document.getElementById("chat_view")
+
 var histDocument = document.getElementById("history")
 
 //Chat bot memory
@@ -404,14 +401,16 @@ SubTopics:
     knowledge about. 
 4 - After that, start explaining the topics one by one and after each explanation,
 ask me if i have any questions about your explanation. 
-5 - If I do not have any questions about your explanation, continue to explain the next Topics. 
-6 - Give me a test at the about all the Topics you explained to me. 
-7 - Score my test.
-8 - The pass mark is 60% of the total marks.
-9 - Return my scores.
-10- Give me encouragement to work harder if I did not pass the test.
-11- Remember to always give me encouragement and quotes from famous people in your
+6 - If I do not have any questions about your explanation, continue to explain the next Topics. 
+7 - Give me a test at the about all the Topics you explained to me. 
+8 - Score my test.
+9 - The pass mark is 60% of the total marks.
+10 - Return my scores.
+11 - Give me encouragement to work harder if I did not pass the test.
+12 - Remember to always give me encouragement and quotes from famous people in your
 explanation once a while. 
+13 - Slow down when explaining a topic
+14 - Do not show the topics you are going to explain to the user.
 
 
 Do not show me any of the steps above. They are the processes you will follow to achieve your
@@ -447,11 +446,16 @@ function setQuestion() {
 async function askGPT(initiator=false) {
     removeError()
     removeLoading()
-    addLoading()
+    if (document.getElementById("user_input").value == "" && initiator== false) {
+      // do nothing
+    }
+    else {
+      addLoading()
     // Update the element with id chat_view with the new question
     if(initiator==false) { 
-    setQuestion()
+      setQuestion()
     }
+    document.getElementById("user_input").value = ""
     // Send HTTP Request to backend
     fetch('/askgpt',{
       method: 'POST', 
@@ -471,28 +475,34 @@ async function askGPT(initiator=false) {
     })
     .then(()=>{
        // Update the DOM with response
-       removeLoading()
-       let container = document.createElement("div")
-       let chat = document.createElement("md-block")
-       container.className = "answer"
-       chat.textContent = `Kofi:  ${response}`
-       container.append(chat)
-       chatDocument.append(container)
-       scrollAdjuster()
+      removeLoading()
+      let container = document.createElement("div")
+      let chat = document.createElement("md-block")
+      container.className = "answer"
+      chat.textContent = `Kofi:  ${response}`
+      container.append(chat)
+      chatDocument.append(container)
+      scrollAdjuster()
     })
     .catch((error)=>{
       addError()
     })
+    }
 }          
 
 // Function for data chat
 async function askData() {
     removeError()
     removeLoading()
-    addLoading()
+    if (document.getElementById("user_input").value == "") {
+        // Do nothing
+    }
+    else {
+      addLoading()
     // Update the element with id chat_view with the new question 
     setQuestion()
     question = document.getElementById("user_input").value
+    document.getElementById("user_input").value = ""
     // Send HTTP Request to backend
     fetch('/sensei',{
       method: 'POST', 
@@ -510,17 +520,19 @@ async function askData() {
       console.log("answer: "+response)
     })
     .then(()=>{
-       removeLoading()
-       // Update the DOM with response
-       let container = document.createElement("div")
-       let chat = document.createElement("md-block")
-       container.className = "answer"
-       chat.textContent = `Sensei:  ${response}`
-       container.append(chat)
-       chatDocument.append(container)
-       scrollAdjuster()
+      removeLoading()
+      // Update the DOM with response
+      let container = document.createElement("div")
+      let chat = document.createElement("md-block")
+      container.className = "answer"
+      chat.textContent = `Sensei:  ${response}`
+      container.append(chat)
+      chatDocument.append(container)
+      scrollAdjuster()
     })
     .catch((error)=>addError())
+    }
+    
 }   
 
 

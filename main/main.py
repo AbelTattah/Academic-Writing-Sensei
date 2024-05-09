@@ -133,14 +133,6 @@ class Kofi:
 
 
 
-
-
-
-
-
-
-
-
 """
 answer = vectordb.similarity_search(question, k=1)
 
