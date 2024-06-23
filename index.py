@@ -43,5 +43,5 @@ def gpt():
 
 if __name__ == '__main__':
     # Running the server
-    server = WSGIServer(('', 3000), app)
+    server = WSGIServer(('', 4000), app)
     server.serve_forever()
