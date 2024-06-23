@@ -11,31 +11,36 @@
     </div>
   <div id="main">
   <div id="history_main">
-  <p style="margin-left:1.5%; margin-top:4.6%; font-weight:bold;">Tips:</p>
+  <p class="Tips" style="margin-right:67%; margin-top:4.6%; font-size:22px">Tips</p>
   <div id="history">
     <md-block>
-      Always make sure to verify Kofi's responses with sensei.
+      Always make sure to verify Kofi's responses by asking the book questions.
 
       This is an experiment
 
       Information from Kofi is not always accurate
-
-      Kofi is 96% accurate
+      
+      The book is the source of grounded truth
     </md-block>
   </div>
   </div>
   <div id="chat_main">
-    <p style="margin-left:1%; font-weight:bold;">Lecture:</p>
+    <p class="Lecture" style="margin-left:45px; font-size:22px">Lecture</p>
     <div id="chat_view">
     </div>
   <div id="input">
     <textarea id="user_input" placeholder = "Your input Goes here"></textarea>
-    <button onclick="askGPT()" id="send_button" title="Send">Chat Kofi</button>
-    <button onclick="askData()" id="send_button" title="Send">Ask Sensei</button>
+    <img onclick="askGPT()" id="send_button_1" src="../static/up.png" />
+    
+    <img onclick="askData()" id="send_button" src="../static/book.png" />
   </div>
 </div>
 </div>
     <style>
+        ::-webkit-scrollbar {
+        display: none;
+        }  
+
         body {
           display:flex;
           justify:center;
@@ -99,32 +104,32 @@
           border-width:1px;
           border-right-width:0px;
           border-style:groove;
-          border-top-left-radius:20px;
+          border-top-left-radius:10px;
           border-bottom-left-radius:20px;
         }
 
         #chat_view {
-          height:55%;
+          height:60%;
           overflow-y:scroll;
           transition:2.4s;
-          padding-top:0.7rem;
           width:90%;
-          padding:2rem;
+          padding:1rem;
         }
 
         #input {
-          width:90%;
+          width:70%;
           height:13%;
           display:flex;
           flex-direction:row;
           box-shadow: 1.5px 1.5px 1.5px grey;
           padding:10px;
-          margin-left:1rem;
+          margin-left:1.8rem;
           justify:'center';
           align-items:'center';
           gap:1rem;
           border-width:1px;
           border-style:groove;
+          margin:0 auto;
           margin-bottom:14px;
           border-radius:14px;
         }
@@ -132,6 +137,8 @@
         #user_input {
           width:60%;
           border-width:0px;
+          margin-left:1.8rem;
+          resize:none;
           height:70%;
         }
 
@@ -140,7 +147,8 @@
         }
 
         .question {
-          margin-left:2rem;
+          margin-left:4%;
+          font-weight:400;
         }
 
         .answer {
@@ -148,7 +156,7 @@
           margin-left:4%;
           padding:3%;
           background-color:#1C3449;
-          border-radius:20px;
+          border-radius:10px;
           color:white;
         }
 
@@ -156,17 +164,24 @@
           display:flex;
           justify-content:center;
           align-items:center;
-          box-shadow: 3px 3px 5px grey;
-          background-color:white;
-          margin-top:1rem;
-          height:50%;
+          height:40%;
+          margin-top:0.5rem;
           padding:0.6rem;
-          border-radius:10px;
+          transition:0.4s;
         }
-
+        #send_button_1 {
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          height:40%;
+          margin-left:1.5rem;
+          margin-top:0.5rem;
+          padding:0.6rem;
+          transition:0.4s;
+        }
         #send_button:hover {
-          background-color:black;
           color:white;
+          height:53%;
         }
 
         #history {
@@ -191,7 +206,7 @@
         }
 
         .error {
-          margin-left:1rem;
+          margin-left:5%;
           color:red;
         }
 
@@ -209,8 +224,9 @@
             height:70%;
             padding:3%;
             overflow-y:scroll;
+            margin-left:30px;
           }
-
+        
 
           #chat_main {
             border-left-width:0px;
@@ -219,7 +235,7 @@
 
           #input {
             width:80%;
-            margin-left:0;
+            margin:0 auto;
           }
 
           #chat_main {
@@ -231,6 +247,10 @@
             justify-content:center;
             box-shadow: 0px 0px 0px white;
             align-items:center;
+          }
+
+          .Lecture {
+            margin-right:90%;
           }
 
         }
@@ -249,7 +269,19 @@
 
           #input {
             width:70%;
+            height:13%;
+            display:flex;
+            flex-direction:row;
+            box-shadow: 1.5px 1.5px 1.5px grey;
+            padding:10px;
             margin-left:0;
+            justify:'center';
+            align-items:'center';
+            gap:1rem;
+            border-width:1px;
+            border-style:groove;
+            margin-bottom:14px;
+            border-radius:14px;
           }
 
           #chat_main {
@@ -264,6 +296,7 @@
 
           #input {
             width:90%;
+            margin:0 auto;
           }
 
         }
@@ -274,6 +307,9 @@
           width: 30px;
           height: 30px;
           animation: spin 2s linear infinite;
+        }
+        .Lecture {
+          margin-right:83%;
         }
         
         @keyframes spin {
@@ -434,9 +470,9 @@ function setQuestion() {
   input = document.getElementById("user_input").value
   memory.push({role:'user',content:`${input}`})
   console.log(input)
-  let chat = document.createElement("md-block")
+  let chat = document.createElement("p")
   chat.className = 'question'
-  chat.textContent = `####  You:  ${input}`
+  chat.textContent = `You:  ${input}`
   chatDocument.append(chat)
   scrollAdjuster()
   console.log("Updating DOM with question")
@@ -479,7 +515,7 @@ async function askGPT(initiator=false) {
       let container = document.createElement("div")
       let chat = document.createElement("md-block")
       container.className = "answer"
-      chat.textContent = `Kofi:  ${response}`
+      chat.textContent = `  ${response}`
       container.append(chat)
       chatDocument.append(container)
       scrollAdjuster()
