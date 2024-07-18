@@ -13,7 +13,7 @@ The Langchain python library is used to create a chatbot that is able to answer 
 data. This chatbot combines the power of the openai GPT-3.5 turbo LLM and some other techniques to
 enable it to give accurate answers.
 
-Click here to try the application [Academic Writing](https://academic-writing-sensei-1.onrender.com/)
+Click here to try the application [Academic Writing](http://aca.acasensei.online/)
 
 The data used in this chatbot is obtained from an Academic writing Textbook.
 
