@@ -1,22 +1,13 @@
-# Academic Writing Sensei 
+# Introduction
 
-This is a simple chatbot that teaches you academic writing
+This is a simple chatbot web application that teaches you academic writing
 
 ## Introduction
 
 The primary goal of this chatbot is to be able to teach Academic 
 Writing in an interactive way.
 
-This software aims to help in studies
-
-The Langchain python library is used to create a chatbot that is able to answer questions based on 
-data. This chatbot combines the power of the openai GPT-3.5 turbo LLM and some other techniques to
-enable it to give accurate answers.
-
-Click here to try the application [Academic Writing](http://aca.acasensei.online/)
-
-The data used in this chatbot is obtained from an Academic writing Textbook.
-
+Click here to try the application [[Academic Writing](http://aca.acasensei.online/)](https://academic-writing-sensei-1.onrender.com)
 
 ## Technologies languages used
 
@@ -95,21 +86,27 @@ You need an openai account to obtain an API key.
 ## Routes
 
 1. (/)  Main or home route
-
+```
+https://academic-writing-sensei-1.onrender.com/
+```
 - Methods : GET
 - Request Body: None
 - Response: HTML homepage of this application
 - This route will be soon removed.
 
 2. (/chat)  Chat page route
-
+```
+https://academic-writing-sensei-1.onrender.com/chat
+```
 - Methods : GET
 - Request Body: None
 - Response: HTML chat page of this application.
 - This route will also be removed soon due to architectural changes
 
 3. (/sensei) Ask questions About Academic writing
-
+```
+https://academic-writing-sensei-1.onrender.com/sensei
+```
 - Methods: POST
 - Request Body:  
             content-Type : application/json
@@ -124,7 +121,9 @@ You need an openai account to obtain an API key.
             }
 
 4. (/askgpt) Ask questions About Academic writing
-
+```
+https://academic-writing-sensei-1.onrender.com/askgpt
+```
 - Methods: POST
 - Request Body:  
             content-Type : application/json
@@ -189,7 +188,7 @@ http://localhost:3000
 5. Merging 🎉
 
 
-All suggestions are completely welcome at tattahabelk@gmail.com
+All suggestions are completely welcome at abeltattahh@gmail.com
 
 Happy hacking ✌
 
