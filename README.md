@@ -1,13 +1,8 @@
-# Introduction
-
-This is a simple chatbot web application that teaches you academic writing
-
 ## Introduction
 
-The primary goal of this chatbot is to be able to teach Academic 
-Writing in an interactive way.
+This is a simple chatbot web application that teaches you academic writing in an interactive way.
 
-Click here to try the application [[Academic Writing](http://aca.acasensei.online/)](https://academic-writing-sensei-1.onrender.com)
+Click here to try the application [[Academic Writing](http://aca.acasensei.online)](https://academic-writing-sensei-1.onrender.com)
 
 ## Technologies languages used
 
